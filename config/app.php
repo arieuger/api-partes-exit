@@ -161,7 +161,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // Autenticación jwt
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class
+        // Tymon\JWTAuth\Providers\LaravelServiceProvider::class
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+
 
 
     ],
@@ -214,7 +216,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Autenticación jwt
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        // 'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
 
     ],
 
