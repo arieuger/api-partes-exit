@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET', 'changeme'),
+    'secret' => env('JWT_SECRET', 'RvInDaPjvKMPySG8VjaVXvrlTbYdMFHZ'),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'ttl' => 60,
+    'ttl' => env('JWT_TTL', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -98,7 +98,7 @@ return [
     |
     */
 
-    'required_claims' => ['iss', 'iat', 'exp', 'nbf', 'sub', 'jti'],
+    'required_claims' => ['iss', 'iat', 'nbf', 'sub', 'jti'],
 
     /*
     |--------------------------------------------------------------------------

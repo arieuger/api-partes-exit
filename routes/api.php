@@ -13,12 +13,20 @@ use App\Models\ParteCabecera;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('jwt.auth')->get('user', function (Request $request) {
+    $user = auth()->user();
+    return response()->json($user->all());
 });
 
 // TODO: Controlador ParteCabecera
-Route::resource('ParteCabecera','ParteCabeceraController');
+// Route::resource('ParteCabecera','ParteCabeceraController');
+
+Route::middleware('jwt.auth')->resource('ParteCabecera','ParteCabeceraController');
+
 
 // Rexistro, login e autenticación de usuarios
 Route::post('user/register','APIRegisterController@register');
