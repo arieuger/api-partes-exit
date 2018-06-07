@@ -20,6 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // TODO: Controlador ParteCabecera
 Route::resource('ParteCabecera','ParteCabeceraController');
 
+// Rexistro, login e autenticación de usuarios
+Route::post('user/register','APIRegisterController@register');
+Route::post('user/login','APILoginController@login');
+
 // Route::get('partes/todos', function() {
 //   $partes = ParteCabecera::all();
 //   return $partes->toJson();
