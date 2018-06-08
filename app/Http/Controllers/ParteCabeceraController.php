@@ -14,7 +14,8 @@ class ParteCabeceraController extends Controller
      */
     public function index()
     {
-        $partes = ParteCabecera::all();
+        $partes = ParteCabecera::where('CodigoEmpresa',2)
+                                ->get();
         return response()->json($partes);
     }
 
@@ -47,7 +48,7 @@ class ParteCabeceraController extends Controller
      */
     public function show($id)
     {
-        //
+      
     }
 
     /**
@@ -70,7 +71,7 @@ class ParteCabeceraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
