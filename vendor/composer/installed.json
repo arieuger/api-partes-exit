@@ -1,5 +1,43 @@
 [
     {
+        "name": "coenjacobs/eloquent-composite-primary-keys",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/coenjacobs/eloquent-composite-primary-keys.git",
+            "reference": "62d0cc1107cf3f91e4890f65d2bc08c13a3195f8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/coenjacobs/eloquent-composite-primary-keys/zipball/62d0cc1107cf3f91e4890f65d2bc08c13a3195f8",
+            "reference": "62d0cc1107cf3f91e4890f65d2bc08c13a3195f8",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/database": "^5.5"
+        },
+        "time": "2017-10-23T09:10:24+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "CoenJacobs\\EloquentCompositePrimaryKeys\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Coen Jacobs",
+                "email": "coenjacobs@gmail.com"
+            }
+        ],
+        "description": "Offers composite primary keys on Eloquent models"
+    },
+    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "0.1",
         "version_normalized": "0.1.0.0",
