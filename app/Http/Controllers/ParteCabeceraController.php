@@ -12,21 +12,11 @@ class ParteCabeceraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($codigoEmpresa)
     {
-        $partes = ParteCabecera::where('CodigoEmpresa',2)
+        $partes = ParteCabecera::where('CodigoEmpresa',$codigoEmpresa)
                                 ->get();
         return response()->json($partes);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -46,9 +36,13 @@ class ParteCabeceraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-      
+    public function show($codigoEmpresa, $ejercicioParte, $serieParte, $numeroParte) {
+      $partes = ParteCabecera::where('CodigoEmpresa', $codigoEmpresa)
+                              ->where('EjercicioParte', $ejercicioParte)
+                              ->where('SerieParte', $serieParte)
+                              ->where('NumeroParte', $numeroParte)
+                              ->get();
+      return response()->json($partes);
     }
 
     /**
