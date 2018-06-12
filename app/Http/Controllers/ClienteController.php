@@ -7,9 +7,16 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller {
     public function index($codigoEmpresa) {
-      $clientes = Cliente::where('CodigoEmpresa', $codigoEmpresa)
-                         ->where('Potencial',0)
-                         ->get();
+      // $clientes = Cliente::where('CodigoEmpresa', $codigoEmpresa)
+      //                    ->where('Potencial',0)
+      //                    ->get();
+
+     $clientes = Cliente::select('CodigoEmpresa, CodigoCliente, SiglaNacion, CifDni, CifEuropeo,
+                                  RazonSocial, Nombre, Domicilio, CodigoCondiciones')
+                        ->where('CodigoEmpresa',$codigoEmpresa)
+                        ->where('Potencial',0)
+                        ->get();
+
       return response()->json($clientes);
     }
 
@@ -17,6 +24,8 @@ class ClienteController extends Controller {
       $clientes = Cliente::where('CodigoEmpresa', $codigoEmpresa)
                          ->where('CodigoCliente', $codigoCliente)
                          ->get();
+
+
       return response()->json($clientes);
     }
 }

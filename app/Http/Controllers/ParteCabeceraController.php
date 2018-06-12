@@ -14,8 +14,20 @@ class ParteCabeceraController extends Controller
      */
     public function index($codigoEmpresa)
     {
-        $partes = ParteCabecera::where('CodigoEmpresa',$codigoEmpresa)
-                                ->get();
+        // $partes = ParteCabecera::where('CodigoEmpresa',$codigoEmpresa)
+        //                         ->get();
+
+        $partes = \DB::table('ParteCabecera')
+                    ->select(\DB::raw('CodigoEmpresa, EjercicioParte, SerieParte, NumeroParte, StatusParte,
+                                  TipoParte, DescripcionTipoParte, CodigoArticulo, DescripcionArticulo,
+                                  FechaParte, isnull(FechaEjecucion,\'\') AS FechaEjecucion, CodigoEmpleado, NombreCompleto, CodigoProyecto,
+                                  NombreProyecto, ComentarioCierre, ComentarioRecepcion, CodigoCliente, Nombre,
+                                  Importe, ImporteGastos, ImporteFacturable, CodigoUsuario, FechaUltimaModificacion,
+                                  isnull(FechaCierre,\'\') AS FechaCierre, HoraCierre, TotalUnidades, NombreUsuarioCierre,
+                                  CodigoUsuarioCierre'))
+                    ->where('CodigoEmpresa',$codigoEmpresa)
+                    ->get();
+
         return response()->json($partes);
     }
 

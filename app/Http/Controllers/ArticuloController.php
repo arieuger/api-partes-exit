@@ -8,8 +8,10 @@ use App\Models\Articulo;
 class ArticuloController extends Controller
 {
     public function index($codigoEmpresa) {
-        $articulos = Articulo::where('CodigoEmpresa',$codigoEmpresa)
-                                ->get();
+        $articulos = Articulo::select('CodigoArticulo','DescripcionArticulo','PrecioNetoVenta')
+                             ->where('CodigoEmpresa',$codigoEmpresa)
+                             ->whereRaw('CodigoFamilia IN (SELECT CodigoFamilia FROM Familias WHERE CodigoEmpresa =' .$codigoEmpresa .')')
+                             ->get();
         return response()->json($articulos);
     }
 
