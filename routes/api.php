@@ -22,15 +22,21 @@ Route::middleware('jwt.auth')->get('user', function (Request $request) {
 Route::post('user/register','APIRegisterController@register');
 Route::post('user/login','APILoginController@login');
 
+// TODO: Inserción, update
 // ParteCabecera
 Route::group(['prefix'=>'ParteCabecera','middleware'=>'jwt.auth'], function() {
   Route::get('{codigoEmpresa}','ParteCabeceraController@index');
   Route::get('{codigoEmpresa}/{ejercicioParte}/{serieParte}/{numeroParte}','ParteCabeceraController@show');
-  // TODO: Inserción, update
 });
 
 // Articulo
 Route::group(['prefix'=>'Articulo','middleware'=>'jwt.auth'], function() {
   Route::get('{codigoEmpresa}','ArticuloController@index');
-  Route::get('{codigoEmpresa}/{codigoArticulo}','ArticuloController@show/');
+  Route::get('{codigoEmpresa}/{codigoArticulo}','ArticuloController@show');
+});
+
+// Cliente
+Route::group(['prefix'=>'Cliente','middleware'=>'jwt.auth'], function() {
+  Route::get('{codigoEmpresa}','ClienteController@index');
+  Route::get('{codigoEmpresa}/{codigoCliente}','ClienteController@show');
 });

@@ -32,7 +32,35 @@ class APILoginController extends Controller
         return response()->json(['error'=>'No se pudo crear el token'],500);
       }
 
-      return response()->json(compact('token'));
+      $codigoUsuario = \DB::table('MCUsuarios')
+                          ->select('CodigoUsuario')
+                          ->where('Correo',$credentials['email'])
+                          ->pluck('CodigoUsuario')[0];
+
+      $codigoPlantilla = \DB::table('MCUsuarios')
+                            ->select('CodigoPlantilla')
+                            ->where('CodigoUsuario', $codigoUsuario)
+                            ->pluck('CodigoPlantilla')[0];
+
+      $nombreCorto = \DB::table('MCUsuarios')
+                        ->select('NombreCorto')
+                        ->where('CodigoUsuario', $codigoUsuario)
+                        ->pluck('NombreCorto')[0];
+
+      $empresas =\DB::table('Empresas')
+                    ->join('Empleados','Empresas.CodigoEmpresa','=','Empleados.CodigoEmpresa')
+                    ->select('Empresas.CodigoEmpresa','Empresas.Empresa', 'Empleados.NombreCompleto')
+                    ->where('Empleados.CodigoEmpleado','=',$codigoPlantilla)
+                    ->get();
+
+
+      return response()->json([
+        compact('token',
+                'codigoPlantilla',
+                'codigoUsuario',
+                'nombreCorto',
+                'empresas')
+      ]);
 
     }
 }
