@@ -12,10 +12,7 @@ class ParteCabeceraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($codigoEmpresa)
-    {
-        // $partes = ParteCabecera::where('CodigoEmpresa',$codigoEmpresa)
-        //                         ->get();
+    public function index($codigoEmpresa) {
 
         $partes = \DB::table('ParteCabecera')
                     ->select(\DB::raw('CodigoEmpresa, EjercicioParte, SerieParte, NumeroParte, StatusParte,

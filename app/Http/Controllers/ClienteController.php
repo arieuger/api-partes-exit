@@ -6,14 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 
 class ClienteController extends Controller {
-    public function index($codigoEmpresa) {
-      // $clientes = Cliente::where('CodigoEmpresa', $codigoEmpresa)
-      //                    ->where('Potencial',0)
-      //                    ->get();
 
-     $clientes = Cliente::select('CodigoEmpresa, CodigoCliente, SiglaNacion, CifDni, CifEuropeo,
-                                  RazonSocial, Nombre, Domicilio, CodigoCondiciones')
-                        ->where('CodigoEmpresa',$codigoEmpresa)
+    public function index($codigoEmpresa) {
+     $clientes = Cliente::select('CodigoEmpresa', 'CodigoCliente', 'SiglaNacion', 'CifDni', 'CifEuropeo',
+                                  'RazonSocial', 'Nombre', 'Domicilio', 'CodigoCondiciones')
+                        ->where('CodigoEmpresa', $codigoEmpresa)
                         ->where('Potencial',0)
                         ->get();
 

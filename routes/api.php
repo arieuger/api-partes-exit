@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Http\Request;
+use App\Models\ParteLineas;
 use App\Models\ParteCabecera;
 
 /*
@@ -39,4 +40,9 @@ Route::group(['prefix'=>'Articulo','middleware'=>'jwt.auth'], function() {
 Route::group(['prefix'=>'Cliente','middleware'=>'jwt.auth'], function() {
   Route::get('{codigoEmpresa}','ClienteController@index');
   Route::get('{codigoEmpresa}/{codigoCliente}','ClienteController@show');
+});
+
+// ParteLineas
+Route::Group(['prefix'=>'ParteLineas','middleware'=>'jwt.auth'], function() {
+  Route::get('{codigoEmpresa}/{ejercicioParte}/{serieParte}/{numeroParte}','ParteLineasController@index');
 });
