@@ -26,8 +26,11 @@ Route::post('user/login','APILoginController@login');
 // TODO: Inserción, update
 // ParteCabecera
 Route::group(['prefix'=>'ParteCabecera','middleware'=>'jwt.auth'], function() {
-  Route::get('{codigoEmpresa}','ParteCabeceraController@index');
+  Route::get('{codigoEmpresa}/{fumLocal}','ParteCabeceraController@index')
+    ->where(['codigoEmpresa' => '[\d]+']);
+
   Route::get('{codigoEmpresa}/{ejercicioParte}/{serieParte}/{numeroParte}','ParteCabeceraController@show');
+  Route::Get('FechaUltimaModificacion/{codigoEmpresa}','ParteCabeceraController@lastFUM');
 });
 
 // Articulo

@@ -12,8 +12,9 @@ class ParteCabeceraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($codigoEmpresa) {
+    public function index($codigoEmpresa, $fumLocal) {
 
+        // Selecciona os partes que se modificasen máis tarde que os que hai en local
         $partes = \DB::table('ParteCabecera')
                     ->select(\DB::raw('CodigoEmpresa, EjercicioParte, SerieParte, NumeroParte, StatusParte,
                                   TipoParte, DescripcionTipoParte, CodigoArticulo, DescripcionArticulo,
@@ -23,6 +24,7 @@ class ParteCabeceraController extends Controller
                                   isnull(FechaCierre,\'\') AS FechaCierre, HoraCierre, TotalUnidades, NombreUsuarioCierre,
                                   CodigoUsuarioCierre'))
                     ->where('CodigoEmpresa',$codigoEmpresa)
+                    ->whereRaw( '? < FechaUltimaModificacion', [$fumLocal])
                     ->get();
 
         return response()->json($partes);
@@ -77,14 +79,11 @@ class ParteCabeceraController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    // Obten fecha última modificación
+    public function lastFUM($codigoEmpresa) {
+      $fecha = ParteCabecera::selectRaw('max(FechaUltimaModificacion) as string')
+                            ->where('CodigoEmpresa', $codigoEmpresa)
+                            ->get();
+      return $fecha[0];
     }
 }
