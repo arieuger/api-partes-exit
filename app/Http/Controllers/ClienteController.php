@@ -25,4 +25,17 @@ class ClienteController extends Controller {
 
       return response()->json($clientes);
     }
+
+    // Obtén proxectos do parte
+    public function getProyectos($codigoEmpresa, $codigoCliente) {
+      $proyectos = \DB::table('Proyectos')
+                      ->select('CodigoProyecto', 'NombreProyecto')
+                      ->where('ProyectoActivo',-1)
+                      ->where('CodigoEmpresa',$codigoEmpresa)
+                      ->where('CodigoCliente',$codigoCliente)
+                      ->get();
+
+      return response()->json($proyectos);
+    }
+
 }

@@ -26,11 +26,17 @@ Route::post('user/login','APILoginController@login');
 // TODO: Inserción, update
 // ParteCabecera
 Route::group(['prefix'=>'ParteCabecera','middleware'=>'jwt.auth'], function() {
+
   Route::get('{codigoEmpresa}/{fumLocal}','ParteCabeceraController@index')
     ->where(['codigoEmpresa' => '[\d]+']);
 
-  Route::get('{codigoEmpresa}/{ejercicioParte}/{serieParte}/{numeroParte}','ParteCabeceraController@show');
-  Route::Get('FechaUltimaModificacion/{codigoEmpresa}','ParteCabeceraController@lastFUM');
+  Route::get('{codigoEmpresa}/{ejercicioParte}/{serieParte}/{numeroParte}','ParteCabeceraController@show')
+    ->where(['codigoEmpresa' => '[\d]+',
+             'ejercicioParte' => '[\d]{4}']);
+
+  Route::get('FechaUltimaModificacion/{codigoEmpresa}','ParteCabeceraController@lastFUM');
+
+  Route::get('update', 'ParteCabeceraController@updateOrCreate');
 });
 
 // Articulo
@@ -43,6 +49,8 @@ Route::group(['prefix'=>'Articulo','middleware'=>'jwt.auth'], function() {
 Route::group(['prefix'=>'Cliente','middleware'=>'jwt.auth'], function() {
   Route::get('{codigoEmpresa}','ClienteController@index');
   Route::get('{codigoEmpresa}/{codigoCliente}','ClienteController@show');
+
+  Route::get('Proyectos/{codigoEmpresa}/{codigoCliente}','ClienteController@getProyectos');
 });
 
 // ParteLineas
